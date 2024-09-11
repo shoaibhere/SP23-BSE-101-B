@@ -1,0 +1,11 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+#header{
+  background-color: #005eff;
+}
+#menu{
+  display: inline;
+
+}
