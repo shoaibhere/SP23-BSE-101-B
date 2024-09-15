@@ -250,6 +250,7 @@
     visibility: visible;
     opacity: 1;
     background-color: #47c8ff;
+    border-left: 1px solid white;
   }
   .after{
     position: absolute;
@@ -257,6 +258,10 @@
     opacity: 0;
     transition: 0.15s;
     background-color:rgb(119, 5, 188);
+  }
+  #find-out-more .before, #find-out-more .after{
+    right: -15%;
+    border-left: 1px solid white; 
   }
   .animation-button
   {
@@ -277,7 +282,7 @@
     opacity: 1;
     transition: 0.15s;
   }
-  #find-out-more a,#news-div a,#view-all-news a,#iconic-brands-div a{
+  #find-out-more a,#news-div a,#view-all-news a,#iconic-brands-div a,#view-details a{
     text-decoration: none;
   }
   .animation-button:hover .button-content-div{
@@ -286,7 +291,7 @@
   .animation-button:hover #button-text{
     color:#47c8ff;
   }
-  #find-our-more a:visited, #news-div a:visited{
+  #find-our-more a:visited, #news-div a:visited, #view-details a:visited, #iconic-brands-div a:visited  {
     color: inherit;
     background-color: inherit;
     height: inherit;
@@ -412,7 +417,6 @@
   justify-content: space-between;
   height: 500px;
   overflow: hidden;
-  margin-bottom: 1000px;
 }
 #iconic-brands-img{
   width: 60%;
@@ -442,6 +446,61 @@
 #iconic-brands-div h1{
   font-size: 48px;
 }
-/* #E60067 */
-
-  
+#key-links{
+  background-color: #001F82;
+  display: flex;
+  height: 500px;
+  padding: 64px;
+  overflow: hidden;
+  margin-bottom: 1000px;
+}
+#key-links div{
+  min-width: 33.33%;
+}
+#key-links h1,a{
+  color: white;
+}
+#view-details-button-and-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+#unilever-img{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-right: 50px;
+}
+#unilever-img img{
+  width: 100%;
+  object-fit: cover;
+}
+#view-details .after,.before{
+  right: -30%;
+  border-color: #001F82;
+}
+#view-details .animation-button:hover .button-content-div{
+  background-color:#FFEC9A;
+}
+#view-details .after{
+  background-color: #FFEC9A;
+}
+#details-button-text{
+  color: rgb(119, 5, 188);
+  width: 100%;
+}
+#view-details .button-content-div{
+  width: 100%;
+}
+#view-details button{
+  margin-top: 10px;
+}
+#hyperlink-and-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#hyperlink-and-text a:hover{
+  text-decoration: none;
+}
