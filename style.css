@@ -4,7 +4,6 @@
   font-family: "Unilever Shilling", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 #logo{
-  float: left;
   height: 144px;
   width: 144px;
 }
@@ -44,7 +43,6 @@
   margin-right: 1.5em;
   font-size: 14px;
   border-style: none;
-  font-weight: bold;
 }
 #search-box:hover{
   background-color:  #47c8ff;
@@ -58,7 +56,6 @@
 }
 a{
   text-decoration: underline;
-  font-weight: bold;
 }
 a:hover{
   text-decoration: none;
@@ -104,7 +101,6 @@ a:visited{
 .bottom-menu-item{
   font-size: 15px;
   color: white;
-  font-weight: bold;
   margin-bottom: 1.95em;
   margin-right: 1.5em;
   text-decoration: underline;
@@ -113,4 +109,26 @@ a:visited{
   text-decoration: none;
   transition: 0.15s;
   cursor: pointer;
+}
+#welcome-div{
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+  height: 435px;
+}
+#welcome-logo{
+  background-color: rgba(255,233,51,255);
+  color: #1f36c7;
+  font-weight: 900;
+  font-size: 4em;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#unilever-welcome-image-div{
+  width: 50%;
+}
+#unilever-welcome-image{  
+  height: 435px;
 }
