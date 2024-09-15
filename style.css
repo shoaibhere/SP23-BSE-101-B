@@ -173,6 +173,7 @@
   color:#47c8ff;
   transition: 0.15s;
 }
+
 #stats-manager-div{
   height: 185px;
   overflow: hidden;
@@ -199,6 +200,7 @@
   font-size: 26px;
 }
 .stat-container{
+  height: auto;
   background-color: #1f36c7;
   padding: 16px;
   color: white;
@@ -275,7 +277,7 @@
 #find-out-more:hover span{
   color:#47c8ff;
 }
-#find-our-more a:visited{
+#find-our-more a:visited, #news-div a:visited{
   color: inherit;
   background-color: inherit;
   height: inherit;
@@ -284,4 +286,17 @@
 }
 #find-out-more{
   margin-bottom: 52px;
+}
+#news-div{
+  background-color: #47c8ff;
+  height: 730px;
+  padding: 64px;
+  margin-bottom: 500px;
+}
+#news-div h1{
+  color: #1f36c7;
+  font-size: 38px;
+}
+#news-div img{
+  position: relative;
 }
