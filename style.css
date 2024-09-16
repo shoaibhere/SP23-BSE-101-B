@@ -17,7 +17,6 @@
   }
   #header{
     background-color: #005eff;
-    overflow: hidden;
     display: flex;
     justify-content: space-between;
   }
@@ -91,14 +90,15 @@
     background-color: #ffc000;
     width: 300px;
     padding: 5px;
-    z-index: 10;
+    z-index: 100;
     opacity: 0;
+    font-size: 14px;
     visibility: hidden;
     top: 100%;
     left: 0;
     color: #1f36c7;
     transition: opacity 0.3s , visibility 0.3s ;
-    box-shadow: 3px 2px 1px rgba(0,0,0,0.125);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
   }
 
   #theme-container:hover #tool-tip {
@@ -122,7 +122,6 @@
   #welcome-div{
     display: flex;
     justify-content: space-evenly;
-    overflow: hidden;
     height: 435px;
   }
   #welcome-logo{
@@ -140,6 +139,7 @@
   }
   #unilever-welcome-image{  
     height: 435px;
+    width: 100%;
   }
   #footer
   {
@@ -534,4 +534,63 @@
 }
 .content-card:hover{
   background-color: white;
+}
+#jama-punji button{
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+}
+#jama-punji-link{
+  background-color:#005eff;
+  width: 100%;
+  padding: 16px;
+  color: white;
+  text-decoration: underline;
+  font-size: 20px;
+  text-align: left;
+}
+#search-div{
+  margin-top: 80px;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f8f4ec;
+  margin-bottom: 500px;
+}
+#search-box-footer{
+  border: 1px solid black;
+  margin-top: 5px;
+}
+#search-div h1{
+  color:#005eff;
+}
+#search-box-footer input{
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+#search-box-footer button{
+  border: none;
+  padding: 15px 20px;
+  background-color: white;
+  color: white;
+}
+#search-box-footer button:hover{
+  cursor: pointer;
+}
+#search-box-footer input:focus{
+  outline: none;
+}
+#search-box-footer input::placeholder{
+  font-size: 18px;
+}
+#search-box-footer{
+  width: 100%;
+  display: flex;
 }
