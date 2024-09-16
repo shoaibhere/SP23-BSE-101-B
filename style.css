@@ -560,7 +560,6 @@
   flex-direction: column;
   gap: 10px;
   background-color: #f8f4ec;
-  margin-bottom: 500px;
 }
 #search-box-footer{
   border: 1px solid black;
@@ -593,4 +592,27 @@
 #search-box-footer{
   width: 100%;
   display: flex;
+}
+#social-media-div{
+  background-color: #001F82;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  color: white;
+  padding: 16px;
+  font-size: 20px;
+  gap: 30px;
+  margin-bottom: 500px;
+}
+#social-media-div button{
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+#social-media-div a:visited, #social-media-div a{
+  text-decoration: none;
+}
+#social-media-div button:hover{
+  size: 1px;
 }
