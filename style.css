@@ -9,7 +9,6 @@
     background-color: inherit;
     height: inherit;
     width: inherit;
-    text-decoration: none;
   }
   #logo{
     height: 144px;
@@ -554,6 +553,9 @@
   font-size: 20px;
   text-align: left;
 }
+#jama-punji button:hover #jama-punji-link,#jama-punji button a{
+  text-decoration: none;
+}
 #search-div{
   margin-top: 80px;
   padding: 80px;
@@ -613,7 +615,7 @@
   width: 20px;
   height: 20px;
 }
-#social-media-div a:visited, #social-media-div a{
+#social-media-div a:visited,#jama-punji button a:visited, #social-media-div a{
   text-decoration: none;
 }
 #connect-contact{
@@ -622,7 +624,6 @@
   padding: 64px;
   gap:10%;
   background-color: #f8f4ec;
-  margin-bottom: 500px;
 }
 #connect-contact h1{
   color:#005eff;
@@ -646,4 +647,28 @@
 }
 #contact-button button:hover #contact-button-text{
   color: #47c8ff;
+}
+#footer{
+  color: white;
+  background-color: #005EFF;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+#links-div{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+#left-div{
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+#footer-image-div,#footer-image-div img{
+  width: 100%;
+}
+#footer a:hover{
+  text-decoration: none;
 }
