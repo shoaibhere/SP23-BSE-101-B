@@ -141,7 +141,7 @@
     height: 435px;
     width: 100%;
   }
-  #footer
+  #footer-buttons
   {
     display: flex;
     justify-content: space-between;
@@ -439,6 +439,7 @@
 }
 #iconic-brands-div .before,#iconic-brands-div .after{
   right: -25%;
+  border-color: white;
 }
 #iconic-brands-div button{
   margin-top: 20px;
@@ -574,13 +575,16 @@
   padding: 10px 20px;
   font-size: 18px;
 }
-#search-box-footer button{
+.social-media-logo,#search-box-footer button{
   border: none;
   padding: 15px 20px;
-  background-color: white;
+  background-color: inherit;
   color: white;
 }
-#search-box-footer button:hover{
+#search-box-footer button{
+  background-color: white;
+}
+.social-media-logo:hover{
   cursor: pointer;
 }
 #search-box-footer input:focus{
@@ -602,7 +606,6 @@
   padding: 16px;
   font-size: 20px;
   gap: 30px;
-  margin-bottom: 500px;
 }
 #social-media-div button{
   border: none;
@@ -613,6 +616,34 @@
 #social-media-div a:visited, #social-media-div a{
   text-decoration: none;
 }
-#social-media-div button:hover{
-  size: 1px;
+#connect-contact{
+  display: flex;
+  justify-content: center;
+  padding: 64px;
+  gap:10%;
+  background-color: #f8f4ec;
+  margin-bottom: 500px;
+}
+#connect-contact h1{
+  color:#005eff;
+  font-size: 48px;
+}
+#connect-contact p{
+  color: gray;
+}
+#connect-with-us,#contact-us{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#contact-button .before,#contact-button .after{
+  right: -39%;
+  border-color: white;
+}
+#contact-button a{
+  color:rgb(119, 5, 188);
+  text-decoration: none;
+}
+#contact-button button:hover #contact-button-text{
+  color: #47c8ff;
 }
