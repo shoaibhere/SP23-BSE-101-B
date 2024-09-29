@@ -91,15 +91,15 @@
 .after{
   opacity: 0;
 }
-#find-out-more button:hover div, #find-out-more button:hover span{
+#find-out-more button:hover div, #find-out-more button:hover span,#explore-our-brands button:hover div, #explore-our-brands button:hover span{
   background-color: #7705bc;
   transition: 0.15s;
   color: #47c8ff;
 }
-#find-out-more button:hover .after{
+#find-out-more button:hover .after, #explore-our-brands button:hover .after{
   opacity: 1;
 }
-#find-out-more button:hover .button-icon{
+#find-out-more button:hover .button-icon, #explore-our-brands button:hover .button-icon{
   border-left: 1px solid white;
 }
 
