@@ -68,6 +68,12 @@ a:hover,#header li:hover{
 .bg-purple{
   background-color: #7705bc;
 }
+.bg-mediumblue{
+  background-color:#005eff;
+}
+.bg-navyblue{
+  background-color: #001F82;
+}
 .text-darkblue{
   color:#1f36c7;
 }
@@ -106,15 +112,15 @@ a:hover,#header li:hover{
 .after{
   opacity: 0;
 }
-#find-out-more button:hover div, #find-out-more button:hover span,#explore-our-brands button:hover div, #explore-our-brands button:hover span{
+#find-out-more button:hover div, #find-out-more button:hover span,#explore-our-brands button:hover div, #explore-our-brands button:hover span,#contact-button button:hover div, #contact-button button:hover span{
   background-color: #7705bc;
   transition: 0.15s;
   color: #47c8ff;
 }
-#find-out-more button:hover .after, #explore-our-brands button:hover .after{
+#find-out-more button:hover .after,#contact-button button:hover .after, #explore-our-brands button:hover .after{
   opacity: 1;
 }
-#find-out-more button:hover .button-icon, #explore-our-brands button:hover .button-icon{
+#find-out-more button:hover .button-icon,#contact-button button:hover .button-icon, #explore-our-brands button:hover .button-icon{
   border-left: 1px solid white;
 }
 
@@ -139,4 +145,16 @@ a:hover,#header li:hover{
 }
 #view-details button:hover .button-icon{
   border-left: 1.5px solid #7705bc;
+}
+#cookie:hover{
+  background-color:#1f36c7;
+  color: #47c8ff;
+  transition: 0.15s;
+  cursor: pointer;
+}
+#back-to-top:hover, #back-to-top:hover i{
+  background-color: #47c8ff;
+  color: #1f36c7 !important;
+  transition: 0.15s;
+  cursor: pointer;
 }
