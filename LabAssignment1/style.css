@@ -8,10 +8,19 @@
   width:145px;
   height: 145px;
 }
+.h20{
+  height: 20%;
+}
 .w-20{
   width:20%;
 }
-.bg-custom{
+.w250px{
+  width: 250px;
+}
+.w-40{
+  width: 40%;
+}
+.bg-darkblue{
   background-color:  #1f36c7;
 }
 .bg-lightblue{
@@ -19,6 +28,9 @@
 }
 .text-purple{
   color: #7705bc;
+}
+.bg-wheat{
+  background-color: #f8f4ec;
 }
 .fs-10{
   font-size: 85%;
@@ -35,14 +47,20 @@
 .h-80px{
   height: 80x;
 }
-.bg-custom1{
+.bg-yellow{
   background-color: #FFE933;
 }
-.text-custom{
+.bg-purple{
+  background-color: #7705bc;
+}
+.text-darkblue{
   color:#1f36c7;
 }
-.text-custom1{
+.text-mediumblue{
   color:#005eff;
+}
+.text-lightblue{
+  color: #47c8ff;
 }
 #theme-container {
   position: relative;
@@ -73,14 +91,28 @@
 .after{
   opacity: 0;
 }
-#find-out-more:hover div, #find-out-more:hover span{
+#find-out-more button:hover div, #find-out-more button:hover span{
   background-color: #7705bc;
   transition: 0.15s;
   color: #47c8ff;
 }
-#find-out-more:hover .after{
+#find-out-more button:hover .after{
   opacity: 1;
 }
-#find-out-more:hover .button-icon{
+#find-out-more button:hover .button-icon{
   border-left: 1px solid white;
 }
+
+#view-all-news button:hover div, #view-all-news button:hover span{
+  background-color:#ffc000;
+  transition: 0.15s;
+  color:#7705bc;
+}
+#view-all-news button:hover .after{
+  opacity: 1;
+}
+#view-all-news button:hover .button-icon{
+  border-left: 1.5px solid #47c8ff;
+}
+
+
