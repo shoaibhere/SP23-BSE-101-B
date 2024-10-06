@@ -21,7 +21,7 @@
         <ul id="menu" class="list-unstyled d-flex mt-4 justify-content-end align-items-baseline px-3 gap-3 ">
           <li class="menu-items">
             <div id="theme-container">
-              <button class="d-flex align-items-center px-2 gap-2 bg-primary border-0 text-light" id="theme-button">
+              <button class="d-none d-lg-flex align-items-center px-2 gap-2 bg-primary border-0 text-light" id="theme-button">
                 <span>&#9728;</span>
                 <span>Theme</span>
                 <i class="fa-solid fa-caret-down" style="color: rgb(119, 221, 245);"></i>
@@ -33,15 +33,24 @@
               </div>
             </div>
           </li>
-          <li class="menu-items">
+          <li class="menu-items d-none d-lg-inline">
             <i class="fa-solid fa-earth-americas" style="color: #ffffff;"></i>
             <span>Unilever Pakistan</span>
           </li>
-          <li class="menu-items">
+          <li class="menu-items d-none d-lg-inline">
             <a href="https://www.unilever.pk/location-selector/" class="text-light">Change Location</a>
           </li>
           <li class="menu-items">
-            <button class="d-flex justify-content-center p-2 gap-1 align-items-center text-light bg-darkblue border-0" id="search-box">
+            <div class="d-flex gap-4" style="cursor:auto;">
+              <button id="search-button-div" class="d-sm-flex d-lg-none justify-content-center p-2 px-3 gap-1 align-items-center text-light bg-darkblue border-0" id="search-box">
+                <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+              </button>
+              <button class="d-sm-flex d-lg-none justify-content-center p-2 gap-1 align-items-baseline gap-2 text-light bg-primary border-0" id="search-box">
+                <i class="fa-sharp fa-solid fa-bars" style="color: #ffffff;"></i>
+                <span>Menu</span>
+              </button>
+            </div>
+            <button class="d-none d-lg-flex justify-content-center p-2 gap-1 align-items-center text-light bg-darkblue border-0" id="search-box">
               <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
               <span>Search site</span>
             </button>
@@ -49,7 +58,7 @@
         </ul>
       </div>
       <div id="bottom-menu-div">
-        <ul id="bottom-menu" class="list-unstyled d-flex mb-3 gap-5 px-4">
+        <ul id="bottom-menu" class="list-unstyled d-none d-lg-flex mb-3 gap-5 px-4">
           <li class="bottom-menu-item text-decoration-underline">Our company</li>
           <li class="bottom-menu-item text-decoration-underline">Our brands</li>
           <li class="bottom-menu-item">Sustainability
@@ -66,63 +75,69 @@
       </div>
     </div>
   </div>
-  <div id="welcome-div" class="d-flex w-100 text-darkblue bg-yellow">
-    <div id="welcome-logo" class="w-50 d-flex justify-content-center align-items-center fs-11">
-      Welcome to<br>Unilever Pakistan
+  <div id="welcome-div" class="d-flex flex-column flex-lg-row text-darkblue bg-yellow">
+    <div id="welcome-logo" class="d-flex justify-content-lg-center align-items-center p-3 p-lg-5 fs-1 fs-lg-11">
+      Welcome to Unilever Pakistan
     </div>
-    <div id="unilever-welcome-image-div" class="w-50 ">
-      <img id="unilever-welcome-image" class="w-100" src="Images/img-1.webp" alt="">
+    <div id="unilever-welcome-image-div" class="w-lg-50">
+      <img id="unilever-welcome-image" class="w-100 h-100" src="Images/img-1.webp" alt="">
     </div>
   </div>
   <div id="stats-div" class="d-flex w-100 flex-column align-items-center justify-content-center gap-5 mt-5 text-center p-5">
-    <div id="stats-manager-div" class="d-flex gap-small ">
-      <div id="we-are-unilever-div" class="p-4 d-flex flex-column align-items-end text-mediumblue">
+    <div id="stats-manager-div" class="d-flex flex-column flex-lg-row pe-5 gap-small">
+      <div id="we-are-unilever-div" class="p-4 d-flex flex-column align-items-start align-items-lg-end text-mediumblue">
         <img class="w-10" src="Images/we-are-uniliver-pakistan.jpg" alt="">
-        <h1 class="fs-12 text-nowrap text-end">We are Unilever <br> Pakistan</h1>
+        <h1 class="fs-12 text-end">We are Unilever Pakistan</h1>
       </div> 
-      <div class="stat-container bg-darkblue text-light w-20 p-1 d-flex flex-column align-items-center justify-content-center">
-        <h1 class="fs-11">
-          75
-        </h1>
-        <h2 class="fs-12">
-          years
-        </h2>
-        <h3 class="fs-6">
-          of Sustainable Buisness in Pakistan
-        </h3>
-      </div>
-      <div class="stat-container text-light w-20 p-1 d-flex flex-column align-items-center justify-content-center" style="background-color:#005eff;">
-        <h1 class="fs-11">
-          Over 30
-        </h1>
-        <h2 class="fs-12">
-          brands
-        </h2>
-        <h3 class="fs-6">
-          in our market
-        </h3>
-      </div>
-      <div class="stat-container bg-darkblue w-20 p-1 d-flex flex-column align-items-center justify-content-center text-light">
-        <h1 class="fs-11">
-          #1
-        </h1>
-        <h2 class="fs-12">
-          Employer of Choice
-        </h2>
-        <h3 class="fs-6">
-          for the past 13 years
-        </h3>
-      </div>
-      <div class="stat-container text-light w-20 p-1 d-flex flex-column align-items-center justify-content-center" style="background-color:#005eff;">
-        <h1 class="fs-11">
-          in 90%
-        </h1 class="fs-12">
-        <h2>
-          of Pakistani
-        </h2>
-        <h3 class="fs-6">
-          households
-        </h3>
+      <div class="d-flex flex-column flex-lg-row gap-small">
+        <div class="d-flex gap-small">
+          <div class="stat-container bg-darkblue text-light w-100 p-1 px-lg-1 px-5 d-flex flex-column align-items-center justify-content-center">
+            <h1 class="fs-11">
+              75
+            </h1>
+            <h2 class="fs-12">
+              years
+            </h2>
+            <h3 class="fs-6">
+              of Sustainable Buisness in Pakistan
+            </h3>
+          </div>
+          <div class="stat-container text-light w-100 p-1 px-lg-1 px-5 d-flex flex-column align-items-center justify-content-center" style="background-color:#005eff;">
+            <h1 class="fs-11">
+              Over 30
+            </h1>
+            <h2 class="fs-12">
+              brands
+            </h2>
+            <h3 class="fs-6">
+              in our market
+            </h3>
+          </div>
+        </div>
+        <div class="d-flex gap-small">    
+          <div class="stat-container bg-darkblue w-100 p-1 px-lg-1 px-5 d-flex flex-column align-items-center justify-content-center text-light">
+            <h1 class="fs-11">
+              #1
+            </h1>
+            <h2 class="fs-12">
+              Employer of Choice
+            </h2>
+            <h3 class="fs-6">
+              for the past 13 years
+            </h3>
+          </div>
+          <div class="stat-container text-light w-100 p-1 px-lg-1 px-5 d-flex flex-column align-items-center justify-content-center" style="background-color:#005eff;">
+            <h1 class="fs-11">
+              in 90%
+            </h1 class="fs-12">
+            <h2>
+              of Pakistani
+            </h2>
+            <h3 class="fs-6">
+              households
+            </h3>
+          </div>
+        </div>
       </div>
     </div>
     <div id="find-out-more">
@@ -272,7 +287,7 @@
       </button>
     </div>
   </div>
-  <div id="iconic-brands-div" class="d-flex p-5 gap-5 align-items-center justify-content-between">
+  <div id="iconic-brands-div" class="d-flex flex-column flex-lg-row p-5 gap-5 align-items-lg-center justify-content-lg-between">
     <div id="text-and-button" class="d-flex flex-column align-items-baseline text-nowrap justify-content-center">
       <h1 style="color: #1F36C7;">
         Our iconic brands
@@ -305,14 +320,14 @@
         </button>
       </div>
     </div>
-    <div id="iconic-brands-img" class="w-50">
+    <div id="iconic-brands-img" class="w-lg-50">
       <img class="w-100 h-100" src="Images/our-iconic-brands.webp" alt="">
     </div>
   </div>
-  <div id="key-links" class="d-flex bg-darkblue text-light p-5 justify-content-center align-items-center">
-    <div id="view-details-button-and-text" class="d-flex flex-column align-items-baseline text-nowrap gap-3">
-      <h1>
-        Unilever <br> Pakistan Foods <br> Limited - Annual <br> Report 2023
+  <div id="key-links" class="d-flex flex-column flex-lg-row gap-2 bg-darkblue text-light p-5 justify-content-between w-100 align-items-center">
+    <div id="view-details-button-and-text" class="d-flex flex-column align-items-baseline gap-lg-3">
+      <h1 class="fs-2">
+        Unilever Pakistan Foods Limited - Annual Report 2023
       </h1>
       <div id="view-details" class="d-flex justify-content-center mt-4">
         <button class="animation-button border-0 bg-purple ">
@@ -348,36 +363,36 @@
         Unilever Pakistan Foods Limited - Annual Report 2023 (PDF 13.12 MB)</a>
     </div>
   </div>
-  <div id="content-cards-manager" class="d-flex p-5 gap-5">
+  <div id="content-cards-manager" class="d-flex p-5 gap-5 flex-wrap flex-lg-nowrap align-items-center justify-content-center justify-content-lg-between ">
     <div class="content-card w-33 bg-wheat">
       <a class="text-decoration-none" href="https://www.unilever.pk/sustainability/">
         <img class="w-100" src="Images/sustainability.jpg" alt="">
-        <h1 class="title text-decoration-underline px-3 pt-3">
+        <h1 class="title text-decoration-underline fs-2 px-3 pt-3">
           Sustainability
         </h1>
-        <p class="description px-3 text-body-secondary">
+        <p class="description px-3 fs-6 text-body-secondary">
           We have been driving an ambitious sustainability agenda for over two decades. Yet, in the face of ever-growing economic, environmental and social challenges, we are evolving our approach. 
         </p>
       </a>
     </div>
-    <div class="content-card w-33 bg-wheat">
+    <div class="content-card h-100 w-33 bg-wheat">
       <a class="text-decoration-none" href="https://careers.unilever.com/pakistan">
         <img class="w-100" src="Images/careers.jpg" alt="">
-        <h1 class="title text-decoration-underline px-3 pt-3">
+        <h1 class="title fs-2 text-decoration-underline px-3 pt-3">
           Careers at Unilever
         </h1>
-        <p class="description px-3 text-body-secondary">
+        <p class="description px-3 fs-6 text-body-secondary">
           Visit our dedicated careers site to browse vacancies and find information about what it's like working for us.
         </p>
       </a>
     </div>
-    <div class="content-card w-33 bg-wheat">
+    <div class="content-card h-100 w-33 bg-wheat">
       <a class="text-decoration-none" href="https://www.unilever.pk/news/press-releases/">
         <img class="w-100" src="Images/press.jpg" alt="">
-        <h1 class="title text-decoration-underline px-3 pt-3">
+        <h1 class="title fs-2 text-decoration-underline px-3 pt-3">
           Press &amp; media
         </h1>
-        <p class="description px-3 text-body-secondary">
+        <p class="description px-3 fs-6 text-body-secondary">
           Press releases and media contact information for journalists and commentators.
         </p>
       </a>
