@@ -1,131 +1,170 @@
-// Function to fetch and display posts
-function displayPosts() {
-  $.ajax({
-    url: "https://jsonplaceholder.typicode.com/posts?_limit=9",
-    method: "GET",
-    dataType: "json",
-    success: handleResponse,
-    error: function (error) {
-      console.error("Error fetching posts:", error);
-    },
-  });
-}
-
-// Handle the response and display posts
-function handleResponse(data) {
-  console.log("Response received"+data);
-  var postsList = $("#postsList");
-  postsList.empty();
-
-  $.each(data, function (index, post) {
-    postsList.append(
-      `<div class="d-flex flex-column shadow-lg p-3 rounded">
-          <h1>User ID: ${post.userId}</h1>
-          <h2 class="text-secondary">${post.title}</h2>
-          <p class="text-secondary-emphasis">${post.body}</p>
-          <div>
-            <button class="edit-btn btn btn-primary" data-id="${post.id}">Edit</button>
-            <button class="delete-btn btn btn-danger" data-id="${post.id}">Delete</button>
-          </div>
-        </div>`
-    );
-  });
-}
-
-// Function to delete a post
-function deletePost() {
-  let postId = $(this).attr("data-id");
-  $.ajax({
-    url: "https://jsonplaceholder.typicode.com/posts/" + postId,
-    method: "DELETE",
-    success: function () {
-      displayPosts();  // Refresh the post list
-    },
-    error: function (error) {
-      console.error("Error deleting post:", error);
-    },
-  });
-}
-
-// Handle form submission for create/update
-function handleFormSubmission(event) {
-  event.preventDefault();
-  let postId = $("#createBtn").attr("data-id");
-  var title = $("#post-title").val();
-  var userId = $("#user-id").val();
-  var body = $("#post-content").val();
-
-  if (postId) {
-    // Update existing post
-    $.ajax({
-      url: "https://jsonplaceholder.typicode.com/posts/" + postId,
-      method: "PUT",
-      data: { id: postId, title: title, body: body, userId: userId },
-      success: function () {
-        console.log("Post updated");
-        displayPosts();
-      },
-      error: function (error) {
-        console.error("Error updating post:", error);
-      },
-    });
-  } else {
-    // Create new post
-    $.ajax({
-      url: "https://jsonplaceholder.typicode.com/posts/",
-      method: "POST",
-      data: { title: title, body: body, userId: userId },
-      success: function () {
-        console.log("Post created"+postId);
-        displayPosts();  // Refresh the post list
-      },
-      error: function (error) {
-        console.error("Error creating post:", error);
-      },
-    });
-  }
-}
-
-// Handle the edit button click
-function editBtnClicked(event) {
-  event.preventDefault();
-  let postId = $(this).attr("data-id");
-  $.ajax({
-    url: "https://jsonplaceholder.typicode.com/posts/" + postId,
-    method: "GET",
-    success: function (data) {
-      console.log("Edit post data:", data);
-      $("#clearBtn").show();
-      $("#post-title").val(data.title);
-      $("#user-id").val(data.userId);
-      $("#post-content").val(data.body);
-      $("#createBtn").html("Update").attr("data-id", data.id);
-    },
-    error: function (error) {
-      console.error("Error fetching post for edit:", error);
-    },
-  });
-}
-
-// Document ready function
 $(document).ready(function () {
-  // Initial display of posts
-  displayPosts();
+    const apiKey = 'live_OTibkOxK68klxhefjpKextJBQ92Q7XWFnnVuHEugjSEcxknvSVD8VM68dtqbxX0y'; 
+    const apiUrl = 'https://api.thecatapi.com/v1/images/search?limit=9';
+    const favoritesUrl = 'https://api.thecatapi.com/v1/favourites';
+    let furryFriends = [];
+  
+    function generateFakeCatData() {
+        const name = ['Whiskers', 'Shadow', 'Luna', 'Simba', 'Tigger', 'Oliver', 'Mittens', 'Cleo', 'Nala', 'Sassy', 'Smokey', 'Felix', 'Bella', 'Ginger', 'Milo', 'Oreo', 'Mochi', 'Pepper', 'Paws', 'Tiger', 'Muffin', 'Casper', 'Salem', 'Buttons', 'Socks'];
+        const breeds = ['Siamese', 'Persian', 'Maine Coon', 'Bengal', 'Sphynx', 'British Shorthair'];
+        const colors = ['Black', 'White', 'Gray', 'Brown', 'Ginger', 'Calico'];
+        const interests = ['Napping', 'Chasing Toys', 'Sunbathing', 'Bird Watching', 'Cuddling', 'Exploring', 'Playing with String'];
+        
+        return {
+            breed: breeds[Math.floor(Math.random() * breeds.length)],
+            name: name[Math.floor(Math.random() * name.length)],
+            color: colors[Math.floor(Math.random() * colors.length)],
+            age: Math.floor(Math.random() * 15) + 1,
+            interests: interests.sort(() => 0.5 - Math.random()).slice(0, 3).join(', ')
+        };
+    }
+  
+    function fetchCats() {
+        $.ajax({
+            url: apiUrl,
+            method: 'GET',
+            headers: {
+                'x-api-key': apiKey
+            },
+            success: function (data) {
+                displayCats(data);
+            },
+            error: function (error) {
+                console.error('Error fetching cat data:', error);
+            }
+        });
+    }
+  
+    function displayCats(cats) {
+        cats.forEach(cat => {
+            const fakeData = generateFakeCatData();
+            const catCard = `
+                <div class="card col-md-3 m-2 col-12 h-custom-1" style="width: 18rem;">
+                <div class="h-custom">
+                  <img src="${cat.url}" class="card-img-top h-100 w-100" alt="Cute Cat">
+                </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${fakeData.name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Nickname: <span class="alias">None</span></h6>
+                        <p class="card-text">
+                            Breed: ${fakeData.breed}<br>
+                            Color: ${fakeData.color}<br>
+                            Age: ${fakeData.age} years<br>
+                            Location: Catlandia
+                        </p>
+                        <p><strong>Interests:</strong> ${fakeData.interests}</p>
+                        <a class="btn add-friend button-hover" href="#" data-id="${cat.id}" data-url="${cat.url}" 
+                           data-breed="${fakeData.breed}" data-name="${fakeData.name}" data-color="${fakeData.color}" 
+                           data-age="${fakeData.age}" data-interests="${fakeData.interests}">
+                           Add Friend
+                        </a>
+                    </div>
+                </div>
+            `;
+            $('#cat-list').append(catCard);
+        });
+    }
+  
+    $(document).on('click', '.add-friend', function (e) {
+        e.preventDefault();
+        const catId = $(this).data('id');
+        const catUrl = $(this).data('url');
+        const name = $(this).data('name');
+        const breed = $(this).data('breed');
+        const color = $(this).data('color');
+        const age = $(this).data('age');
+        const interests = $(this).data('interests');
+        const alias = prompt('Enter an alias for this cat:');
+  
+        if (alias) {
+            const rawBody = JSON.stringify({
+                "image_id": catId,
+            });
+            
+            $.ajax({
+                url: favoritesUrl,
+                method: 'POST',
+                headers: {
+                    'x-api-key': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                data: rawBody,
+                success: function (result) {
+                    const friend = { id: result.id, alias: alias, url: catUrl,name, breed, color, age, interests };
+                    furryFriends.push(friend);
+                    displayFurryFriends();
+                },
+                error: function (error) {
+                    console.error('Error adding favorite:', error);
+                    alert("Couldn't Remove Friend. Try Again!");
+                }
+            });
+        }
+    });
+  
+    function displayFurryFriends() {
+        $('#favorites-list').empty();
+        furryFriends.forEach(friend => {
+            const friendCard = `
+                <div class="card col-md-3 m-2 col-12 h-custom-1" style="width: 18rem;">
+                <div class='h-custom'>
+                  <img src="${friend.url}" class="card-img-top h-100" alt="Cute Cat">
+                </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${friend.name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Nickname: <span class="alias">${friend.alias}</span></h6>
+                        <p class="card-text">
+                            Breed: ${friend.breed}<br>
+                            Color: ${friend.color}<br>
+                            Age: ${friend.age} years<br>
+                            Location: Catlandia
+                        </p>
+                        <p><strong>Interests:</strong> ${friend.interests}</p>
+                        <a class="btn edit-alias button-hover" data-id="${friend.id}">Edit Alias</a>
+                        <a class="btn btn-danger remove-friend unfriend-button-hover" href="#" data-id="${friend.id}">Declaw the Friendship!</a>
+                    </div>
+                </div>
+            `;
+            $('#favorites-list').append(friendCard);
+        });
+    }
+  
+    $(document).on('click', '.edit-alias', function (e) {
+        e.preventDefault();
+        const favoriteId = $(this).data('id');
+        const friend = furryFriends.find(f => f.id === favoriteId);
+        if (friend) {
+            const newAlias = prompt('Enter a new alias for this cat:', friend.alias);
+            if (newAlias) {
+                friend.alias = newAlias;
+                displayFurryFriends();
+            }
+        }
+    });
+  
+    $(document).on('click', '.remove-friend', function (e) {
+        e.preventDefault();
+        const favoriteId = $(this).data('id');
 
-  // Event delegation for dynamically created buttons
-  $(document).on("click", ".delete-btn", deletePost);
-  $(document).on("click", ".edit-btn", editBtnClicked);
+        $.ajax({
+            url: `${favoritesUrl}/${favoriteId}`,
+            method: 'DELETE',
+            headers: {
+                'x-api-key': apiKey
+            },
+            success: function () {
+                furryFriends = furryFriends.filter(f => f.id !== favoriteId);
+                displayFurryFriends();
 
-  // Create form submission handler
-  $("#createForm").submit(handleFormSubmission);
-
-  // Clear button functionality
-  $("#clearBtn").on("click", function (e) {
-    e.preventDefault();
-    $("#clearBtn").hide();
-    $("#createBtn").removeAttr("data-id").html("Create");
-    $("#post-title").val("");
-    $("#user-id").val("");
-    $("#post-content").val("");
+            },
+            error: function (error) {
+                console.error('Error deleting favorite:', error);
+                alert("Couldn't Remove Friend. Try Again!");
+            }
+        });
+        alert('Un-fur-gettable Goodbye!');
+    });
+  
+    fetchCats();
   });
-});
+  
