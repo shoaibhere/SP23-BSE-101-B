@@ -2,8 +2,8 @@ $(document).ready(function () {
     const apiKey = 'live_OTibkOxK68klxhefjpKextJBQ92Q7XWFnnVuHEugjSEcxknvSVD8VM68dtqbxX0y'; 
     const apiUrl = 'https://api.thecatapi.com/v1/images/search?limit=9';
     const favoritesUrl = 'https://api.thecatapi.com/v1/favourites';
-    let furryFriends = [];
-  
+    let furryFriends = JSON.parse(localStorage.getItem("friends")) || [];
+
     function generateFakeCatData() {
         const name = ['Whiskers', 'Shadow', 'Luna', 'Simba', 'Tigger', 'Oliver', 'Mittens', 'Cleo', 'Nala', 'Sassy', 'Smokey', 'Felix', 'Bella', 'Ginger', 'Milo', 'Oreo', 'Mochi', 'Pepper', 'Paws', 'Tiger', 'Muffin', 'Casper', 'Salem', 'Buttons', 'Socks'];
         const breeds = ['Siamese', 'Persian', 'Maine Coon', 'Bengal', 'Sphynx', 'British Shorthair'];
@@ -18,7 +18,7 @@ $(document).ready(function () {
             interests: interests.sort(() => 0.5 - Math.random()).slice(0, 3).join(', ')
         };
     }
-  
+
     function fetchCats() {
         $.ajax({
             url: apiUrl,
@@ -34,7 +34,7 @@ $(document).ready(function () {
             }
         });
     }
-  
+
     function displayCats(cats) {
         cats.forEach(cat => {
             const fakeData = generateFakeCatData();
@@ -53,7 +53,7 @@ $(document).ready(function () {
                             Location: Catlandia
                         </p>
                         <p><strong>Interests:</strong> ${fakeData.interests}</p>
-                        <a class="btn add-friend button-hover" href="#" data-id="${cat.id}" data-url="${cat.url}" 
+                        <a class="btn add-friend button-hover" data-id="${cat.id}" data-url="${cat.url}" 
                            data-breed="${fakeData.breed}" data-name="${fakeData.name}" data-color="${fakeData.color}" 
                            data-age="${fakeData.age}" data-interests="${fakeData.interests}">
                            Add Friend
@@ -64,7 +64,7 @@ $(document).ready(function () {
             $('#cat-list').append(catCard);
         });
     }
-  
+
     $(document).on('click', '.add-friend', function (e) {
         e.preventDefault();
         const catId = $(this).data('id');
@@ -75,7 +75,7 @@ $(document).ready(function () {
         const age = $(this).data('age');
         const interests = $(this).data('interests');
         const alias = prompt('Enter an alias for this cat:');
-  
+
         if (alias) {
             const rawBody = JSON.stringify({
                 "image_id": catId,
@@ -90,18 +90,19 @@ $(document).ready(function () {
                 },
                 data: rawBody,
                 success: function (result) {
-                    const friend = { id: result.id, alias: alias, url: catUrl,name, breed, color, age, interests };
+                    const friend = { id: result.id, alias: alias, url: catUrl, name, breed, color, age, interests };
                     furryFriends.push(friend);
+                    localStorage.setItem("friends", JSON.stringify(furryFriends));
                     displayFurryFriends();
                 },
                 error: function (error) {
                     console.error('Error adding favorite:', error);
-                    alert("Couldn't Remove Friend. Try Again!");
+                    alert("Couldn't add friend. Try again!");
                 }
             });
         }
     });
-  
+
     function displayFurryFriends() {
         $('#favorites-list').empty();
         furryFriends.forEach(friend => {
@@ -128,7 +129,6 @@ $(document).ready(function () {
             $('#favorites-list').append(friendCard);
         });
     }
-  
     $(document).on('click', '.edit-alias', function (e) {
         e.preventDefault();
         const favoriteId = $(this).data('id');
@@ -137,11 +137,12 @@ $(document).ready(function () {
             const newAlias = prompt('Enter a new alias for this cat:', friend.alias);
             if (newAlias) {
                 friend.alias = newAlias;
+                localStorage.setItem("friends", JSON.stringify(furryFriends));
                 displayFurryFriends();
             }
         }
     });
-  
+
     $(document).on('click', '.remove-friend', function (e) {
         e.preventDefault();
         const favoriteId = $(this).data('id');
@@ -154,17 +155,17 @@ $(document).ready(function () {
             },
             success: function () {
                 furryFriends = furryFriends.filter(f => f.id !== favoriteId);
+                localStorage.setItem("friends", JSON.stringify(furryFriends)); 
                 displayFurryFriends();
-
             },
             error: function (error) {
                 console.error('Error deleting favorite:', error);
-                alert("Couldn't Remove Friend. Try Again!");
+                alert("Couldn't remove friend. Try again!");
             }
         });
         alert('Un-fur-gettable Goodbye!');
     });
-  
+    
+    displayFurryFriends();
     fetchCats();
-  });
-  
+});
