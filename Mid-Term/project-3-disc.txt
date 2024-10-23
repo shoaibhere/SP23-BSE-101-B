@@ -1,0 +1,1 @@
+Rock Paper Scissors Game using HTML, CSS, JS (Semester 4): A simple, interactive game of Rock, Paper, Scissors created using HTML, CSS, and JavaScript. This project demonstrates basic front-end development skills and implements game logic with dynamic user interaction.
