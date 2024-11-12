@@ -1,0 +1,1 @@
+Java OOP-based Rent a Car Management System (Semester 2): A car rental management system developed using Java and object-oriented programming principles. This project manages vehicle availability, customer bookings, and rental payments, showcasing OOP concepts like classes, inheritance, and encapsulation.
