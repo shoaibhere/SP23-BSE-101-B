@@ -1,0 +1,1 @@
+Python-based Restaurant Management System (Semester 1): This project is a Python-based system designed to streamline restaurant operations. It includes features like order management, billing, and inventory tracking, offering a user-friendly interface for restaurant staff to efficiently handle everyday tasks.

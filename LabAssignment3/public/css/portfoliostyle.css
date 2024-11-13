@@ -1,0 +1,16 @@
+.w-10{
+  width: 10%;
+}
+.bg-purple{
+  background-color: #8750F7;
+}
+.text-purple{
+  color: #8750F7;
+}
+.button-hover:hover{
+  color: #8750F7 !important;
+  background-color: white;
+}
+.portfolio-item:hover{
+  cursor: pointer;
+}
