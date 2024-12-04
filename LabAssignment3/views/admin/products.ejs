@@ -5,7 +5,8 @@
     <thead>
         <tr>
             <th>id</th>
-            <th>Name</th>
+            <th>Type</th>
+            <th>Title</th>
             <th>Price</th>
             <th>Description</th>
             <th>Actions</th>
@@ -15,12 +16,13 @@
         <% for( let index = 0; index < products.length; index++ ) { %>
             <tr>
                 <td><%= products[index]._id %></td>
-                <td><%= products[index].name %></td>
+                <td><%= products[index].type %></td>
+                <td><%= products[index].title %></td>
                 <td><%= products[index].price %></td>
                 <td><%= products[index].description %></td>
                 <td>
-                    <a href="/admin/products/edit" class="btn btn-warning">Edit</a>
-                    <a href="/admin/products/delete" class="btn btn-danger">Delete</a>
+                    <a href="/admin/products/edit/<%= products[index]._id %>" class="btn btn-warning">Edit</a>
+                    <a href="/admin/products/delete/<%= products[index]._id %>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <% } %>
