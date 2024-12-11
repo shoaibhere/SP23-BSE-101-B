@@ -10,7 +10,7 @@ cloudinary.config({
 });
 
 const createCloudinaryStorage = ({
-  folder = "WebTech",
+  folder = "brandImage",
   resourceType = "image",
   format = async (req, file) => {
     const mimeType = file.mimetype.split("/")[1];
