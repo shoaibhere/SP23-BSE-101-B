@@ -1,10 +1,15 @@
 <div class="container mt-5">
   <h2>Item Details</h2>
-  <form method="post" action="/admin/products/create">
-    <!-- Type Input -->
+  <form method="post" action="/admin/products/create" enctype="multipart/form-data">
+    <!-- Brand Dropdown -->
     <div class="form-group">
-      <label for="type">Type</label>
-      <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type">
+      <label for="brand">Brand</label>
+      <select class="form-control" id="brand" name="brand">
+        <option value="">Select a Brand</option>
+        <% brands.forEach(brand => { %>
+          <option value="<%= brand._id %>"><%= brand.name %></option>
+        <% }) %>
+      </select>
     </div>
 
     <!-- Name Input -->
@@ -23,6 +28,12 @@
     <div class="form-group">
       <label for="price">Price</label>
       <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price">
+    </div>
+
+    <!-- Image Input -->
+    <div class="form-group">
+      <label for="productImage">Image</label>
+      <input type="file" class="form-control" id="productImage" name="productImage">
     </div>
 
     <!-- Submit Button -->

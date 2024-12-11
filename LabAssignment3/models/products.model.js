@@ -9,15 +9,20 @@ let productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type:
+  brand:
   {
-    type: String,
-    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Brands',
+    required: true,
   },
   price: {
     type: Number,
     required: true,
   },
+  productImage:{
+    type: String,
+    required: true
+  }
 });
 
 let Product = mongoose.model("Product", productSchema);

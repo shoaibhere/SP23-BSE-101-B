@@ -5,8 +5,9 @@ const mongoose = require("mongoose");
 const Product = require("./models/products.model");
 
 server.use(expressLayouts);
-server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
 
 let adminProductsRouter = require("./routes/admin/products.controller");
 server.use(adminProductsRouter);
@@ -16,6 +17,9 @@ server.use(createRouter);
 
 let portfolioController = require("./routes/portfolio/portfolio.controller");
 server.use(portfolioController);
+
+let brandController = require("./routes/admin/brand.controller");
+server.use(brandController);
 
 server.set("view engine","ejs");
 
