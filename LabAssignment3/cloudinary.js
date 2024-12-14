@@ -19,7 +19,8 @@ const createCloudinaryStorage = ({
   },
   publicId,
 }) => {
-  return new CloudinaryStorage({
+  console.log(cloudinary);
+  return new CloudinaryStorage({ 
     cloudinary,
     params: {
       folder,

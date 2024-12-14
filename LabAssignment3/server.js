@@ -3,6 +3,8 @@ var expressLayouts = require("express-ejs-layouts");
 let server = express();
 const mongoose = require("mongoose");
 const Product = require("./models/products.model");
+const dotenv = require("dotenv");
+dotenv.config({path:".env.local"});
 
 server.use(expressLayouts);
 server.use(express.json());
@@ -29,10 +31,9 @@ server.get("/",(req,res)=>{
   res.render("unilever-home");
 });
 
-let connectionString = "mongodb://localhost:27017/webtech ";
 mongoose
-  .connect(connectionString)
-  .then(() => console.log("Connected to Mongo DB Server: " + connectionString))
+  .connect(process.env.MONGODB_CONNECTION_STRING)
+  .then(() => console.log("Connected to Mongo DB Server: " + process.env.MONGODB_CONNECTION_STRING))
   .catch((error) => console.log(error.message));
 
 server.listen(5000,()=>{

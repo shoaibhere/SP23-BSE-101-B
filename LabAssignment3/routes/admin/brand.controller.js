@@ -12,7 +12,6 @@ router.get("/admin/brands/create", (req, res) => {
 });
 
 router.post("/admin/brands/create", upload.single('brandImage'), async (req, res) => {
-  
   try {
     console.log('Uploaded file:', req.file); // 🛠️ Debug: Check if file is uploaded
     console.log('Request body:', req.body); // 🛠️ Debug: Check if body data is being sent
