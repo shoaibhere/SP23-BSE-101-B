@@ -1,17 +1,17 @@
-const multer = require("multer");
-const { createCloudinaryStorage } = require("./cloudinary");
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('./cloudinary');
 
-const storage = createCloudinaryStorage({
-  folder: "brandImage",
-  resourceType: "image",
-  format: async (req, file) => {
-    const mimeType = file.mimetype.split("/")[1];
-    const allowedFormats = ["jpeg", "png", "jpg", "gif"];
-    return allowedFormats.includes(mimeType) ? mimeType : "jpeg";
-  },
-  publicId: (req, file) => `${Date.now()}_${file.originalname}`,
+// Set up Cloudinary storage
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'brands', // Folder name in Cloudinary to store the images
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif'], // Allowed image formats
+    },
 });
 
-const upload = multer({ storage });
+// Initialize multer with Cloudinary storage
+const upload = multer({ storage: storage });
 
 module.exports = upload;
