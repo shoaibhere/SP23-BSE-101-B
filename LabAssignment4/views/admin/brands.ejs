@@ -1,0 +1,68 @@
+<!-- Pagination Controls -->
+<div class="pagination">
+  <h4 class="me-5">Pages</h4>
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <!-- Previous Page Button -->
+      <% if (hasPrevPage) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>&limit=<%= limit || 10 %>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&laquo;</span>
+        </li>
+      <% } %>
+
+      <!-- Page Numbers -->
+      <% for (let page = 1; page <= totalPages; page++) { %>
+        <li class="page-item <%= page === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= page %>&limit=<%= limit || 10 %>"><%= page %></a>
+        </li>
+      <% } %>
+
+      <!-- Next Page Button -->
+      <% if (hasNextPage) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>&limit=<%= limit || 10 %>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&raquo;</span>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+<h2><%- pageTitle %></h2>
+<a href="/admin/brands/create" class="btn btn-info">Create New Brand</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let index = 0; index < brands.length; index++) { %>
+      <tr>
+        <td><%= brands[index].brandName %></td>
+        <td><img src="<%= brands[index].brandImage %>" alt="" class="w-25"></td>
+        <td><%= brands[index].category ? brands[index].category.categoryName : 'No Category' %></td>
+        <td>
+          <a href="/admin/brands/edit/<%= brands[index]._id %>" class="btn btn-warning">Edit</a>
+        </td>
+        <td>
+          <a href="/admin/brands/delete/<%= brands[index]._id %>" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

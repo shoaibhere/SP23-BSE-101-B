@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <h2><%- pageTitle %></h2>
+  <form method="post" action="/admin/brands/edit/<%= brand._id %>" enctype="multipart/form-data">
+
+    <!-- Name Input -->
+    <div class="form-group">
+      <label for="brandName">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="brandName"
+        name="brandName"
+        value="<%= brand.brandName %>"
+        placeholder="Enter Title"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="brand">Category</label>
+      <select class="form-control" id="category" name="category" required>
+        <% categories.forEach(category => { %>
+          <option 
+            value="<%= category._id %>" 
+            <%= brand.category && category._id.toString() === brand.category._id.toString() ? 'selected' : '' %>
+          >
+            <%= category.categoryName %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+    
+    
+
+    <!-- Image Input -->
+    <div class="form-group">
+      <label for="brandImage">Image</label>
+      <!-- Show the current image -->
+      <div class="mb-3">
+        <img
+          src="<%= brand.brandImage %>"
+          alt="Current Brand Image"
+          style="max-width: 200px; max-height: 200px; display: block;"
+        >
+        <small>Current Image, If you don't select any file, the image will not change</small>
+      </div>
+      <!-- File input for replacing the image -->
+      <input
+        type="file"
+        class="form-control"
+        id="brandImage"
+        accept="image/*"
+        name="brandImage"
+      >
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
