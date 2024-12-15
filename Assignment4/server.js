@@ -57,6 +57,9 @@ server.use("/products", authMiddleware, productViewController);
 const cartController = require("./routes/website/cart.controller");
 server.use("/cart", authMiddleware, cartController);
 
+const myordersController = require("./routes/website/ordersview.controller");
+server.use("/myOrders", authMiddleware, myordersController);
+
 // Public Website Routes (No Authentication Required)
 const brandsViewController = require("./routes/website/brandsview.controller");
 server.use("/brands", brandsViewController);

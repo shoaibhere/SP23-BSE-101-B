@@ -1,0 +1,74 @@
+<!-- Pagination Controls -->
+<div class="pagination mb-4 mt-4 container">
+  <h4 class="me-5">Pages</h4>
+  <nav aria-label="Page navigation  container">
+    <ul class="pagination">
+      <!-- Previous Page Button -->
+      <% if (hasPrevPage) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage - 1 %>&limit=<%= limit %>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&laquo;</span>
+        </li>
+      <% } %>
+
+      <!-- Page Numbers -->
+      <% for (let page = 1; page <= totalPages; page++) { %>
+        <li class="page-item <%= page === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= page %>&limit=<%= limit %>"><%= page %></a>
+        </li>
+      <% } %>
+
+      <!-- Next Page Button -->
+      <% if (hasNextPage) { %>
+        <li class="page-item">
+          <a class="page-link" href="?page=<%= currentPage + 1 %>&limit=<%= limit %>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      <% } else { %>
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&raquo;</span>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+
+<!-- Page Title -->
+<h3 class="mb-4  container"><%- pageTitle %></h3>
+
+<!-- Orders Table -->
+<table class="table table-bordered container">
+  <thead class="table-dark">
+    <tr>
+      <th>Order ID</th>
+      <th>Total Price</th>
+      <th>Status</th>
+      <th>Order Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let index = 0; index < orders.length; index++) { %>
+      <tr>
+        <td><%= orders[index]._id %></td>
+        <td><%= orders[index].totalPrice.toFixed(2) %> PKR</td>
+        <td>
+          <span class="badge <%= orders[index].orderStatus === 'Pending' ? 'bg-warning' : orders[index].orderStatus === 'Shipped' ? 'bg-info' : orders[index].orderStatus === 'Delivered' ? 'bg-success' : 'bg-danger' %>">
+            <%= orders[index].orderStatus %>
+          </span>
+        </td>
+        <td><%= new Date(orders[index].orderDate).toLocaleDateString() %></td>
+        <td>
+          <a href="/myorders/view/<%= orders[index]._id %>" class="btn btn-info btn-sm">View</a>
+          <a href="/myorders/delete/<%= orders[index]._id %>" class="btn btn-danger btn-sm">Cancel Order</a>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

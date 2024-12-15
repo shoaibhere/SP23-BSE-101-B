@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="text-primary">Order Details</h1>
+      <a href="/myorders" class="btn btn-secondary">Back to Orders</a>
+  </div>
+
+  <!-- Order Information -->
+  <div class="card shadow-sm mb-4">
+      <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Order Information</h5>
+      </div>
+      <div class="card-body">
+          <p><strong>Order ID:</strong> <%= order._id %></p>
+          <p><strong>Status:</strong> 
+              <span class="badge <%= order.orderStatus === 'Pending' ? 'bg-warning' : order.orderStatus === 'Shipped' ? 'bg-info' : order.orderStatus === 'Delivered' ? 'bg-success' : 'bg-danger' %>">
+                  <%= order.orderStatus %>
+              </span>
+          </p>
+      </div>
+  </div>
+
+  <!-- Customer Information -->
+  <div class="card shadow-sm mb-4">
+      <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">Customer Information</h5>
+      </div>
+      <div class="card-body">
+          <p><strong>Name:</strong> <%= order.customer.firstName %> <%= order.customer.lastName %></p>
+          <p><strong>Email:</strong> <%= order.customer.email %></p>
+          <p><strong>Phone:</strong> <%= order.customer.phone %></p>
+      </div>
+  </div>
+
+  <!-- Shipping Address -->
+  <div class="card shadow-sm mb-4">
+      <div class="card-header bg-dark text-white">
+          <h5 class="mb-0">Shipping Address</h5>
+      </div>
+      <div class="card-body">
+          <p><strong>Address:</strong> <%= order.shippingAddress.address %></p>
+          <p><strong>City:</strong> <%= order.shippingAddress.city %></p>
+          <p><strong>Postal Code:</strong> <%= order.shippingAddress.postalCode %></p>
+      </div>
+  </div>
+
+  <!-- Ordered Items -->
+  <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Ordered Items</h5>
+      </div>
+      <div class="card-body">
+          <table class="table table-borderless">
+              <thead class="table-dark">
+                  <tr>
+                      <th>Product</th>
+                      <th>Brand</th>
+                      <th>Quantity</th>
+                      <th>Price (PKR)</th>
+                      <th>Subtotal (PKR)</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% order.products.forEach(item => { %>
+                      <tr>
+                          <td><%= item.product.title %></td>
+                          <td><%= item.product.brand.brandName %></td>
+                          <td><%= item.quantity %></td>
+                          <td><%= item.price.toFixed(2) %></td>
+                          <td><%= (item.price * item.quantity).toFixed(2) %></td>
+                      </tr>
+                  <% }); %>
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <td colspan="4" class="text-end fw-bold">Total:</td>
+                      <td class="fw-bold text-success"><%= order.totalPrice.toFixed(2) %> PKR</td>
+                  </tr>
+              </tfoot>
+          </table>
+      </div>
+  </div>
+</div>
