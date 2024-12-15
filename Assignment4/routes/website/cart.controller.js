@@ -95,7 +95,7 @@ router.get('/checkout', async(req,res)=>{
 }, 0);
 
   res.render('checkout',{
-    products:productsWithQuantities,totalPrice
+    products:productsWithQuantities,totalPrice,user:req.session.user
   });
 });
 
@@ -130,9 +130,9 @@ router.post("/checkout", async (req, res) => {
     // Step 5: Create the Order object
     let order = new Order({
       customer: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
+        firstName: req.session.user.firstName,
+        lastName: req.session.user.lastName,
+        email: req.session.user.email,
         phone: req.body.phone,
       },
       shippingAddress: {
