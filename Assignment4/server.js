@@ -26,6 +26,9 @@ server.set("view engine", "ejs");
 const adminProductsRouter = require("./routes/admin/product.controller");
 server.use(adminProductsRouter);
 
+const ordersRouter = require("./routes/admin/order.controller");
+server.use(ordersRouter);
+
 const portfolioController = require("./routes/portfolio/portfolio.controller");
 server.use(portfolioController);
 
