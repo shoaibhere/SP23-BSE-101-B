@@ -66,8 +66,12 @@
         <td><%= new Date(orders[index].orderDate).toLocaleDateString() %></td>
         <td>
           <a href="/myorders/view/<%= orders[index]._id %>" class="btn btn-info btn-sm">View</a>
-          <a href="/myorders/delete/<%= orders[index]._id %>" class="btn btn-danger btn-sm">Cancel Order</a>
-        </td>
+          <% if (orders[index].orderStatus === 'Pending') { %>
+            <a href="/myorders/delete/<%= orders[index]._id %>" class="btn btn-danger btn-sm">Cancel Order</a>
+          <% } else { %>
+            <a href="/myorders" class="btn btn-danger btn-sm">Order Cannot be cancelled</a>
+          <% } %>          
+        </td>        
       </tr>
     <% } %>
   </tbody>
