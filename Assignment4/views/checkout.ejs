@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <h4 class="fw-bold text-primary mb-4">Checkout</h4>
+
+  <form action="/checkout" method="POST" class="bg-light shadow-sm rounded-3 p-4">
+      <!-- Personal Details -->
+      <div class="mb-4">
+          <h5 class="fw-bold">Personal Details</h5>
+          <div class="row g-3">
+              <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" id="firstName" name="firstName" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" class="form-control" required>
+              </div>
+              <div class="col-12">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email" id="email" name="email" class="form-control" required>
+              </div>
+              <div class="col-12">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{11}" placeholder="e.g., 03001234567" required>
+              </div>
+          </div>
+      </div>
+
+      <!-- Shipping Address -->
+      <div class="mb-4">
+          <h5 class="fw-bold">Shipping Address</h5>
+          <div class="row g-3">
+              <div class="col-12">
+                  <label for="address" class="form-label">Address</label>
+                  <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+              </div>
+              <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" id="city" name="city" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                  <label for="postalCode" class="form-label">Postal Code</label>
+                  <input type="text" id="postalCode" name="postalCode" class="form-control" required>
+              </div>
+          </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="mb-4">
+          <h5 class="fw-bold">Payment Method</h5>
+          <div class="form-check">
+              <input type="radio" id="cod" name="paymentMethod" value="COD" class="form-check-input" checked required>
+              <label for="cod" class="form-check-label">Cash on Delivery</label>
+          </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="mb-4">
+          <h5 class="fw-bold">Order Summary</h5>
+          <ul class="list-group">
+              <% products.forEach(product => { %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                          <strong><%= product.brand.brandName %> <%= product.title %></strong>
+                          <small class="text-muted d-block">Quantity: <%= product.quantity %></small>
+                      </div>
+                      <span>PKR <%= (product.price * product.quantity).toFixed(2) %></span>
+                  </li>
+              <% }); %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <strong>Total</strong>
+                  <strong>PKR <%= totalPrice.toFixed(2) %></strong>
+              </li>
+          </ul>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary btn-lg">Place Order</button>
+      </div>
+  </form>
+</div>

@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <!-- Success Message -->
+  <div class="text-center mb-4">
+      <h1 class="text-success fw-bold">Order Placed Successfully!</h1>
+      <p class="text-muted">Thank you for your purchase, <%= order.customer.firstName %> <%= order.customer.lastName %>. Your order ID is:</p>
+      <h4 class="text-primary"><%= order._id %></h4>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Order Summary</h5>
+      </div>
+      <div class="card-body">
+          <!-- Customer Details -->
+          <h6 class="fw-bold mb-3">Customer Details</h6>
+          <p>
+              <strong>Name:</strong> <%= order.customer.firstName %> <%= order.customer.lastName %><br>
+              <strong>Email:</strong> <%= order.customer.email %><br>
+              <strong>Phone:</strong> <%= order.customer.phone %>
+          </p>
+
+          <!-- Shipping Address -->
+          <h6 class="fw-bold mb-3">Shipping Address</h6>
+          <p>
+              <strong>Address:</strong> <%= order.shippingAddress.address %><br>
+              <strong>City:</strong> <%= order.shippingAddress.city %><br>
+              <strong>Postal Code:</strong> <%= order.shippingAddress.postalCode %>
+          </p>
+
+          <!-- Order Items -->
+          <h6 class="fw-bold mb-3">Ordered Items</h6>
+          <table class="table table-borderless">
+              <thead class="table-dark">
+                  <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Price (PKR)</th>
+                      <th>Subtotal (PKR)</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% order.products.forEach(item => { %>
+                  <tr>
+                    <td><%= item.product.brand.brandName %> <%= item.product.title %></td> <!-- Access the title from the populated product -->
+                    <td><%= item.quantity %></td>
+                    <td><%= item.price.toFixed(2) %></td>
+                    <td><%= (item.price * item.quantity).toFixed(2) %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+              
+              <tfoot>
+                  <tr>
+                      <td colspan="3" class="text-end fw-bold">Total:</td>
+                      <td class="fw-bold text-success"><%= order.totalPrice.toFixed(2) %> PKR</td>
+                  </tr>
+              </tfoot>
+          </table>
+      </div>
+  </div>
+
+  <!-- Back to Home Button -->
+  <div class="text-center mt-4">
+      <a href="/brands" class="btn btn-primary">Continue Shopping</a>
+  </div>
+</div>

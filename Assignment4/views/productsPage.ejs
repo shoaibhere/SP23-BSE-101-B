@@ -1,0 +1,35 @@
+<!-- Products Section -->
+<div class="container mt-4">
+  <h2 class="fw-bold text-primary mb-4">Available Products</h2>
+
+  <!-- If products exist -->
+  <% if (products.length > 0) { %>
+      <div class="row">
+          <% products.forEach(product => { %>
+              <div class="col-md-4 mb-4">
+                  <div class="card h-100 shadow-sm border-0">
+                      <!-- Product Image -->
+                      <img src="<%= product.productImage %>" class="card-img-top" alt="<%= product.title %>" style="height: 200px; object-fit: cover;">
+                      
+                      <!-- Product Details -->
+                      <div class="card-body">
+                          <h5 class="card-title fw-bold text-dark"><%= product.title %></h5>
+                          <p class="card-text text-muted"><%= product.description || "No description available." %></p>
+                      </div>
+                      
+                      <!-- Product Price and Button -->
+                      <div class="card-footer bg-transparent border-0 text-center">
+                          <p class="fw-bold text-success mb-2"><%= product.price.toFixed(2) %> PKR</p>
+                          <a href="/add-to-cart/<%= product._id %>" class="btn btn-primary">Add to Cart</a>
+                      </div>
+                  </div>
+              </div>
+          <% }); %>
+      </div>
+  <% } else { %>
+      <!-- If no products are available -->
+      <div class="text-center my-5">
+          <h4 class="text-danger">No products found for this brand.</h4>
+      </div>
+  <% } %>
+</div>

@@ -1,0 +1,1 @@
+Catbook.com using AJAX and jQuery (Semester 4): A mini social networking site called "Catbook.com" developed using AJAX and jQuery. It enables users to post updates, comment, and like posts in real-time without refreshing the page, highlighting CRUD operations and dynamic content loading.

@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <h4 class="fw-bold text-primary mb-4">Your Shopping Cart</h4>
+
+  <% if (products.length > 0) { %>
+      <div class="table-responsive">
+          <table class="table align-middle table-borderless bg-light shadow-sm rounded-3">
+              <thead class="table-dark text-white">
+                  <tr>
+                      <th class="p-3">Product</th>
+                      <th class="p-3">Price (PKR)</th>
+                      <th class="p-3 text-center">Quantity</th>
+                      <th class="p-3 text-end">Subtotal (PKR)</th>
+                      <th class="p-3 text-center">Actions</th>
+                  </tr>
+              </thead>
+              <tbody id="cart-body">
+                  <% products.forEach(product => { %>
+                      <tr class="bg-white shadow-sm cart-row" data-id="<%= product._id %>">
+                          <td class="p-3 d-flex align-items-center">
+                              <img src="<%= product.productImage %>" alt="<%= product.title %>" 
+                                   class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                              <span class="fw-semibold"><%= product.brand.brandName %> <%= product.title %></span>
+                          </td>
+                          <td class="p-3 text-success fw-bold price"><%= product.price.toFixed(2) %></td>
+                          <td class="p-3 text-center">
+                              <label class="form-control quantity" style="width: 70px;"><%= product.quantity %></label>
+                          </td>
+                          <td class="p-3 text-end fw-bold text-primary subtotal">
+                              <%= (product.price * product.quantity).toFixed(2) %>
+                          </td>
+                          <td class="p-3 text-center">
+                              <a href="/cart/remove/<%= product._id %>" class="btn btn-danger btn-sm remove-btn">Remove</a>
+                          </td>
+                      </tr>
+                  <% }); %>
+              </tbody>
+              <!-- Total Row -->
+              <tfoot>
+                  <tr>
+                      <td colspan="3" class="text-end fw-bold p-3">Total:</td>
+                      <td id="total-price" class="p-3 text-end fw-bold text-success"><%= totalPrice.toFixed(2) %> PKR</td>
+                      <td></td>
+                  </tr>
+              </tfoot>
+          </table>
+      </div>
+      <!-- Checkout Button -->
+      <div class="d-flex justify-content-center mt-3 mb-3">
+          <a href="/checkout" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+      </div>
+  <% } else { %>
+      <!-- Empty Cart -->
+      <div class="text-center mt-5">
+          <h5 class="text-danger">Your cart is empty!</h5>
+          <p class="text-muted">Start shopping and add some products to your cart.</p>
+      </div>
+  <% } %>
+</div>
