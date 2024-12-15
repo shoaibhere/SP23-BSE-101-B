@@ -12,7 +12,7 @@ let productSchema = new mongoose.Schema({
   brand:
   {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Brands',
+    ref: 'Brand',
     required: true,
   },
   price: {

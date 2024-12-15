@@ -6,9 +6,14 @@ const brandSchema = new mongoose.Schema({
         required: true,
     },
     brandImage: {
-        type: String,
+        type: String,   
         required: true,
     },
+    category:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true,
+    }
 });
 
 const Brand = mongoose.model("Brand", brandSchema);

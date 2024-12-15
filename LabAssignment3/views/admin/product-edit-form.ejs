@@ -1,28 +1,60 @@
 <div class="container mt-5">
   <h2>Item Details</h2>
   <form method="post" action="/admin/products/edit/<%=product._id%>">
-    <!-- Type Input -->
+    
     <div class="form-group">
-      <label for="type">Type</label>
-      <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type" value="<%=product.type%>">
+      <label for="brand">Brand</label>
+      <select class="form-control" id="brand" name="brand" required>
+        <!-- Preselect the current brand -->
+        <% brands.forEach(brand => { %>
+          <option 
+            value="<%= brand._id %>" 
+            <%= product.brand && brand._id.toString() === product.brand._id.toString() ? 'selected' : '' %>
+          >
+            <%= brand.brandName %>
+          </option>
+        <% }) %>
+      </select>
     </div>
-
+    
+    
     <!-- Name Input -->
     <div class="form-group">
       <label for="name">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="<%=product.title%>">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="<%= product.title %>">
     </div>
 
     <!-- Description Input -->
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter Description" ><%=product.description%></textarea>
+      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter Description"><%= product.description %></textarea>
     </div>
 
     <!-- Price Input -->
     <div class="form-group">
       <label for="price">Price</label>
-      <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price" value="<%=product.price%>">
+      <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price" value="<%= product.price %>">
+    </div>
+
+    <div class="form-group">
+      <label for="productImage">Image</label>
+      <!-- Show the current image -->
+      <div class="mb-3">
+        <img
+          src="<%= product.productImage %>"
+          alt="Current Product Image"
+          style="max-width: 200px; max-height: 200px; display: block;"
+        >
+        <small>Current Image, If you don't select any file, the image will not change</small>
+      </div>
+      <!-- File input for replacing the image -->
+      <input
+        type="file"
+        class="form-control"
+        id="productImage"
+        accept="image/*"
+        name="productImage"
+      >
     </div>
 
     <!-- Edit Button -->

@@ -7,7 +7,8 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'brands', // Folder name in Cloudinary to store the images
-        allowed_formats: ['jpg', 'jpeg', 'png', 'gif'], // Allowed image formats
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif','avif','webp'],
+        transformation: [{ width: 500, height: 500, crop: 'fill' }], // Allowed image formats
     },
 });
 
