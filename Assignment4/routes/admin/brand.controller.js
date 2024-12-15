@@ -2,9 +2,10 @@ const express = require('express');
 const Brand = require('../../models/brands.model');
 let router = express.Router();
 const Category = require("../../models/category.model");
-const upload = require('../../multer');  // Multer configuration
+const upload = require("../../middlewares/multer");
 
-router.get('/admin/brands', async (req, res) => {
+
+router.get('/', async (req, res) => {
     try {
       const page = parseInt(req.query.page) || 1; // Default to page 1
       const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
@@ -37,7 +38,7 @@ router.get('/admin/brands', async (req, res) => {
   
 
 // Display the brand creation form
-router.get('/admin/brands/create', async(req, res) => {
+router.get('/create', async(req, res) => {
     let categories = await Category.find();
     res.render('./admin/brandForm', {
         layout: 'adminLayout',
@@ -47,7 +48,7 @@ router.get('/admin/brands/create', async(req, res) => {
 });
 
 // Handle brand creation with image upload
-router.post('/admin/brands/create', upload.single('brandImage'), async (req, res) => {
+router.post('/create', upload.single('brandImage'), async (req, res) => {
     try {
         console.log('Uploaded file:', req.file); // 🛠️ Debug: Check if file is uploaded
         console.log('Request body:', req.body); // 🛠️ Debug: Check if body data is being sent
@@ -72,12 +73,12 @@ router.post('/admin/brands/create', upload.single('brandImage'), async (req, res
     }
 });
 
-router.get('/admin/brands/delete/:id', async(req,res)=>{
+router.get('/delete/:id', async(req,res)=>{
     await Brand.findByIdAndDelete(req.params.id);
     res.redirect('/admin/brands');
 });
 
-router.get('/admin/brands/edit/:id',async(req,res)=>{
+router.get('/edit/:id',async(req,res)=>{
     let brand = await Brand.findById(req.params.id).populate('category');
     let categories = await Category.find();
     res.render('./admin/brand-edit-form',{
@@ -88,7 +89,7 @@ router.get('/admin/brands/edit/:id',async(req,res)=>{
     })
 });
 
-router.post('/admin/brands/edit/:id', upload.single('brandImage'), async (req, res) => {
+router.post('/edit/:id', upload.single('brandImage'), async (req, res) => {
     try {
       // Find the existing brand by ID
       let brand = await Brand.findById(req.params.id);

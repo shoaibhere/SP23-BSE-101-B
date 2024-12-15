@@ -9,7 +9,7 @@ router.use(cookieParser());
 let session = require("express-session");
 router.use(session({ secret: "my session secret" }));
 
-router.get("/cart", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
       let cart = req.cookies.cart;
       cart = cart ? JSON.parse(cart) : []; // Parse the cart cookie (id and quantity)
@@ -44,8 +44,6 @@ router.get("/cart", async (req, res) => {
   }
 });
 
-
-
 router.get("/add-to-cart/:id", (req, res) => {
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : []; // Retrieve the cart, parse JSON
   const productId = req.params.id;
@@ -66,7 +64,7 @@ router.get("/add-to-cart/:id", (req, res) => {
   return res.redirect("/brands");
 });
 
-router.get("/cart/remove/:id", (req, res) => {
+router.get("/remove/:id", (req, res) => {
   let cart = req.cookies.cart;
   cart = cart ? JSON.parse(cart) : [];
 
@@ -91,8 +89,6 @@ router.get('/checkout', async(req,res)=>{
         quantity: cartItem ? cartItem.quantity : 1 // Add quantity
     };
 });
-
-
    // Calculate the total price
    const totalPrice = productsWithQuantities.reduce((total, product) => {
     return total + product.price * product.quantity;
@@ -156,7 +152,7 @@ router.post("/checkout", async (req, res) => {
     res.clearCookie("cart");
 
     // Redirect to success page
-    res.redirect(`/order-success/${order._id}`);
+    res.redirect(`/cart/order-success/${order._id}`);
   } catch (err) {
     console.error("Error during checkout:", err.message);
     res.status(500).send("Server Error");

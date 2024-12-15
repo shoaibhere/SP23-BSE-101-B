@@ -20,10 +20,33 @@
       <div id="upper-menu-div">
         <ul id="menu" class="list-unstyled d-flex mt-4 justify-content-end align-items-baseline px-3 gap-3 ">
           <li class="menu-items">
+            <a href="/" class="text-light">
+              Home Page
+            </a>
+          </li>
+          <% if (!user) { %>
+          <li class="menu-items">
+            <a href="/register" class="text-light">
+              Register
+            </a>
+          </li>
+          <li class="menu-items">
+            <a href="/login" class="text-light">
+              Login
+            </a>
+          </li>
+          <% } else { %>
+          <li class="menu-items">
+            <a href="/logout" class="text-light">
+              logout
+            </a>
+          </li>
+          <li class="menu-items">
             <a href="/cart" class="text-light">
               <i class="fa-solid fa-cart-shopping"></i>
             </a>
           </li>
+          <% } %>
           <li class="menu-items">
             <div id="theme-container">
               <button class="d-none d-lg-flex align-items-center px-2 gap-2 bg-primary border-0 text-light" id="theme-button">

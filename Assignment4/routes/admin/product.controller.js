@@ -2,9 +2,10 @@ const express = require("express");
 const Brand = require("../../models/brands.model");
 let router = express.Router();
 const Product = require("../../models/products.model");
-const upload = require("../../multer");
+const upload = require("../../middlewares/multer");
 
-router.get("/admin/products", async (req, res) => {
+
+router.get("/", async (req, res) => {
   try {
     // Extract `page` and `limit` from query parameters, with defaults
     const page = parseInt(req.query.page) || 1; // Default to page 1
@@ -43,7 +44,7 @@ router.get("/admin/products", async (req, res) => {
 });
 
 
-router.get("/admin/products/create",async (req,res)=>{
+router.get("/create",async (req,res)=>{
   try {
     const brands = await Brand.find().populate('brandName');
     res.render("./admin/productForm",{
@@ -56,7 +57,7 @@ router.get("/admin/products/create",async (req,res)=>{
   }
 });
 
-router.post("/admin/products/create",upload.single('productImage'), async(req,res)=>
+router.post("/create",upload.single('productImage'), async(req,res)=>
 {
   try {
     console.log('Uploaded file:', req.file); // 🛠️ Debug: Check if file is uploaded
@@ -84,14 +85,14 @@ router.post("/admin/products/create",upload.single('productImage'), async(req,re
 }
 
 });
-router.get("/admin/products/delete/:_id", async(req,res)=>
+router.get("/delete/:_id", async(req,res)=>
 {
   let id= req.params._id;
   await Product.findByIdAndDelete(id);
   res.redirect("/admin/products");
 });
 
-router.get("/admin/products/edit/:id", async(req,res)=>{
+router.get("/edit/:id", async(req,res)=>{
   let id= req.params.id;
   let product = await Product.findById(id).populate('brand');
   let brands = await Brand.find();
@@ -103,7 +104,7 @@ router.get("/admin/products/edit/:id", async(req,res)=>{
   });
 });
 
-router.post("/admin/products/edit/:id",upload.single('productImage'), async(req,res)=>{
+router.post("/edit/:id",upload.single('productImage'), async(req,res)=>{
   try {
     // Find the existing product by ID
     let product = await Product.findById(req.params.id);

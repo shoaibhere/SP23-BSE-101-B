@@ -3,7 +3,7 @@ const Brand = require('../../models/brands.model');
 let router = express.Router();
 const Category = require("../../models/category.model");
 
-router.get("/brands", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
       const { search, category, sort } = req.query;
 

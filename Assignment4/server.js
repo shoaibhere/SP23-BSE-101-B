@@ -1,8 +1,7 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
-mongoose.set('strictPopulate', false);
-const Product = require('./models/products.model');
+mongoose.set("strictPopulate", false);
 
 const dotenv = require("dotenv");
 
@@ -22,38 +21,50 @@ server.use(express.static("public"));
 // Set view engine to EJS
 server.set("view engine", "ejs");
 
-// Routers
-const adminProductsRouter = require("./routes/admin/product.controller");
-server.use(adminProductsRouter);
-
-const ordersRouter = require("./routes/admin/order.controller");
-server.use(ordersRouter);
-
-const portfolioController = require("./routes/portfolio/portfolio.controller");
-server.use(portfolioController);
-
-const brandController = require("./routes/admin/brand.controller");
-server.use(brandController);
-
-const categoryController = require("./routes/admin/category.controller");
-server.use(categoryController);
-
-const brandsViewController = require("./routes/website/brandsview.controller");
-server.use(brandsViewController);
-
-const productViewController = require("./routes/website/productsview.controller");
-server.use(productViewController);
-
-const cartController = require("./routes/website/cart.controller");
-server.use(cartController);
-
-let cookieParser = require("cookie-parser");
+// Session and Cookie Parsers (IMPORTANT: Load these BEFORE auth middleware)
+const cookieParser = require("cookie-parser");
 server.use(cookieParser());
 
-let session = require("express-session");
-server.use(session({ secret: "my session secret" }));
+const session = require("express-session");
+server.use(
+  session({
+    secret: process.env.SECRET || "my_secret", // Use a strong, unique secret
+    resave: false, // Avoid resaving unchanged sessions
+    saveUninitialized: false, // Only save sessions with data
+    cookie: { secure: false }, // Use secure: true in production (with HTTPS)
+  })
+);
 
-// Home route
+// Custom Middleware
+const siteMiddleware = require("./middlewares/site-middleware");
+server.use(siteMiddleware);
+
+const authMiddleware = require("./middlewares/auth-middleware");
+const adminMiddleware = require("./middlewares/admin-middleware");
+
+// Authentication Routes (POST for login/register)
+const authRouter = require("./routes/auth.controller");
+server.use(authRouter);
+
+// Protected Admin Routes (Require Authentication)
+const adminRoute = require("./routes/admin/admin.controller");
+server.use("/admin",authMiddleware,adminMiddleware,adminRoute);
+
+//Login Required
+const productViewController = require("./routes/website/productsview.controller");
+server.use("/products", authMiddleware, productViewController);
+
+const cartController = require("./routes/website/cart.controller");
+server.use("/cart", authMiddleware, cartController);
+
+// Public Website Routes (No Authentication Required)
+const brandsViewController = require("./routes/website/brandsview.controller");
+server.use("/brands", brandsViewController);
+
+const portfolioController = require("./routes/portfolio/portfolio.controller");
+server.use("/about-me", portfolioController);
+
+// Home route (No Authentication Required)
 server.get("/", (req, res) => {
   res.render("unilever-home");
 });
@@ -69,7 +80,7 @@ mongoose
   .catch((error) => console.error("MongoDB Connection Error:", error.message));
 
 // Start the server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Project started at http://localhost:${PORT}`);
 });

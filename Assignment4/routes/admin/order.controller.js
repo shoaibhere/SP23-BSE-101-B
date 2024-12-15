@@ -1,11 +1,8 @@
 const express = require("express");
-const Brand = require("../../models/brands.model");
 let router = express.Router();
-const Product = require("../../models/products.model");
 const Order = require("../../models/order.model");
-const upload = require("../../multer");
 
-router.get("/admin/orders", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Extract `page` and `limit` from query parameters, with defaults
     const page = parseInt(req.query.page) || 1; // Default to page 1
@@ -43,12 +40,12 @@ router.get("/admin/orders", async (req, res) => {
   }
 });
 
-router.get('/admin/orders/delete/:id', async(req,res)=>{
+router.get('/delete/:id', async(req,res)=>{
   await Order.findByIdAndDelete(req.params.id);
   res.redirect('/admin/orders');
 });
 
-router.get('/admin/orders/view/:id', async(req,res)=>{
+router.get('/view/:id', async(req,res)=>{
   const order = await Order.findById(req.params.id)
   .populate({
     path: 'products.product',
@@ -62,7 +59,7 @@ router.get('/admin/orders/view/:id', async(req,res)=>{
   });
 });
 
-router.post('/admin/orders/update-status/:id', async(req,res)=>{
+router.post('/update-status/:id', async(req,res)=>{
   let {orderStatus} = req.body;
   await Order.findByIdAndUpdate(req.params.id,{orderStatus},{new:true});
   res.redirect('/admin/orders');  
