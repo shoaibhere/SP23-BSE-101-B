@@ -5,35 +5,39 @@ const Category = require("../../models/category.model");
 const upload = require("../../middlewares/multer");
 
 router.get('/', async (req, res) => {
-    try {
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 10;
-  
-      const skip = (page - 1) * limit;
-  
-      const totalBrands = await Brand.countDocuments();
-      const brands = await Brand.find()
-        .populate('category')
-        .skip(skip)
-        .limit(limit);
-  
-      const totalPages = Math.ceil(totalBrands / limit);
-  
-      res.render('./admin/brands', {
-        layout: 'adminLayout',
-        pageTitle: 'Brands Management',
-        brands,
-        currentPage: page,
-        totalPages,
-        limit,
-        hasNextPage: page < totalPages,
-        hasPrevPage: page > 1,
-      });
-    } catch (error) {
-      console.error('Error fetching brands with pagination:', error);
-      res.status(500).send('An error occurred while fetching brands.');
-    }
-  });
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const searchQuery = req.query.search || "";
+
+    const skip = (page - 1) * limit;
+
+    const query = searchQuery ? { brandName: { $regex: new RegExp(searchQuery, 'i') } } : {};
+    const totalBrands = await Brand.countDocuments(query);
+    const brands = await Brand.find(query)
+      .populate('category')
+      .skip(skip)
+      .limit(limit);
+
+    const totalPages = Math.ceil(totalBrands / limit);
+
+    res.render('./admin/brands', {
+      layout: 'adminLayout',
+      pageTitle: 'Brands Management',
+      brands,
+      currentPage: page,
+      totalPages,
+      limit,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+      searchQuery
+    });
+  } catch (error) {
+    console.error('Error fetching brands with pagination:', error);
+    res.status(500).send('An error occurred while fetching brands.');
+  }
+});
+
 
 router.get('/create', async(req, res) => {
     let categories = await Category.find();

@@ -6,12 +6,22 @@ router.get("/", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
+    const searchQuery = req.query.search || "";
 
     const skip = (page - 1) * limit;
+    let query = {};
+    if (searchQuery) {
+      query = {
+        $or: [
+          {"customer.firstName": { $regex: new RegExp(searchQuery, 'i') }},
+          {"customer.lastName": { $regex: new RegExp(searchQuery, 'i') }}
+        ]
+      };
+    }
 
-    const TotalOrders = await Order.countDocuments();
+    const TotalOrders = await Order.countDocuments(query);
 
-    const orders = await Order.find()
+    const orders = await Order.find(query)
       .populate("products.product")
       .skip(skip)
       .limit(limit);
@@ -27,6 +37,7 @@ router.get("/", async (req, res) => {
       limit,
       hasNextPage: page < totalPages,
       hasPrevPage: page > 1,
+      searchQuery
     });
   } catch (error) {
     console.error("Error fetching orders with pagination:", error);

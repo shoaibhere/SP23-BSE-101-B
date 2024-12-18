@@ -38,7 +38,10 @@
 <h3><%- pageTitle %></h3>
 
 <a href="/admin/products/create" class="btn btn-info">Create New Product</a>
-
+<form action="/admin/products" method="GET" class="d-flex form-inline my-2">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search by product name" aria-label="Search" name="search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
 <table class="table">
   <thead>
     <tr>

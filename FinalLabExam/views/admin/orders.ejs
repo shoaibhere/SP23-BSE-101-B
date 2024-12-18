@@ -37,6 +37,11 @@
 
 <h3 class="mb-4"><%- pageTitle %></h3>
 
+<form action="/admin/orders" method="GET" class="d-flex form-inline my-2">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search by customer name" aria-label="Search" name="search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+
 <table class="table table-bordered">
   <thead class="table-dark">
     <tr>

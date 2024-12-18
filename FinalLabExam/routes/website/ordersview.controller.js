@@ -4,37 +4,31 @@ const Order = require("../../models/order.model");
 
 router.get("/", async (req, res) => {
   try {
-    // Extract `page` and `limit` from query parameters, with defaults
-    const page = parseInt(req.query.page) || 1; // Default to page 1
-    const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
+    const page = parseInt(req.query.page) || 1; 
+    const limit = parseInt(req.query.limit) || 10; 
 
-    // Calculate the starting index
     const skip = (page - 1) * limit;
 
-    // Fetch total number of products
     const TotalOrders = await Order.countDocuments();
     let userEmail = req.session.user.email;
-    // Fetch products with pagination and populate the brand
     const orders = await Order.find({'customer.email':userEmail})
     .populate({
       path: 'products.product',
       populate: {
-        path: 'brand', // Populate the brand field within the product
+        path: 'brand', 
       },
     })
       .skip(skip)
       .limit(limit);
 
-    // Calculate total pages
     const totalPages = Math.ceil(TotalOrders / limit);
 
-    // Render the products page with pagination details
     res.render("./ordersPage", {
       orders,
       pageTitle:"Manage My Orders",
       currentPage: page,
       totalPages,
-      limit, // Pass limit to the frontend
+      limit, 
       hasNextPage: page < totalPages,
       hasPrevPage: page > 1,
     });
@@ -49,7 +43,7 @@ router.get('/view/:id',async(req,res)=>{
   .populate({
     path: 'products.product',
     populate: {
-      path: 'brand', // Populate the brand field within the product
+      path: 'brand',
     },
   });
   res.render('view-order',{

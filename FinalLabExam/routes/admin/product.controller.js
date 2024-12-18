@@ -9,11 +9,15 @@ router.get("/", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
 
+    const searchQuery = req.query.search || "";
+
     const skip = (page - 1) * limit;
 
-    const totalProducts = await Product.countDocuments();
+    const query = searchQuery ? { title: { $regex: new RegExp(searchQuery, 'i') } } : {};
 
-    const products = await Product.find()
+    const totalProducts = await Product.countDocuments(query);
+
+    const products = await Product.find(query)
       .populate("brand")
       .skip(skip)
       .limit(limit);
@@ -29,6 +33,7 @@ router.get("/", async (req, res) => {
       limit,
       hasNextPage: page < totalPages,
       hasPrevPage: page > 1,
+      searchQuery
     });
   } catch (error) {
     console.error("Error fetching products with pagination:", error);
