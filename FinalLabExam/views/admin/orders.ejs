@@ -65,6 +65,11 @@
         </a>
       </th>
       <th>
+        <a class="text-light" href="?sortBy=paymentMethod&sortDirection=<%= sortBy === 'paymentMethod' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Payment Method <%= sortBy === 'paymentMethod' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
+      <th>
         <a class="text-light" href="?sortBy=orderDate&sortDirection=<%= sortBy === 'orderDate' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
           Order Date <%= sortBy === 'orderDate' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
         </a>
@@ -72,7 +77,7 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody> 
     <% for (let index = 0; index < orders.length; index++) { %>
       <tr>
         <td><%= orders[index]._id %></td>
@@ -86,6 +91,7 @@
             <%= orders[index].orderStatus %>
           </span>
         </td>
+        <td><%= orders[index].paymentMethod %></td>
         <td><%= new Date(orders[index].orderDate).toLocaleDateString() %></td>
         <td>
           <a href="/admin/orders/view/<%= orders[index]._id %>" class="btn btn-info btn-sm">View</a>

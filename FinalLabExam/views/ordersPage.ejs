@@ -49,6 +49,7 @@
       <th>Order ID</th>
       <th>Total Price</th>
       <th>Status</th>
+      <th>Payment Method</th>
       <th>Order Date</th>
       <th>Actions</th>
     </tr>
@@ -62,6 +63,9 @@
           <span class="badge <%= orders[index].orderStatus === 'Pending' ? 'bg-warning' : orders[index].orderStatus === 'Shipped' ? 'bg-info' : orders[index].orderStatus === 'Delivered' ? 'bg-success' : 'bg-danger' %>">
             <%= orders[index].orderStatus %>
           </span>
+        </td>
+        <td>
+          <%= orders[index].paymentMethod %>
         </td>
         <td><%= new Date(orders[index].orderDate).toLocaleDateString() %></td>
         <td>

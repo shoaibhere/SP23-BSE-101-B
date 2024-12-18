@@ -43,12 +43,33 @@
       </div>
 
       <div class="mb-4">
-          <h5 class="fw-bold">Payment Method</h5>
-          <div class="form-check">
-              <input type="radio" id="cod" name="paymentMethod" value="COD" class="form-check-input" checked required>
-              <label for="cod" class="form-check-label">Cash on Delivery</label>
-          </div>
-      </div>
+        <h5 class="fw-bold">Payment Method</h5>
+        <div class="form-check">
+            <input type="radio" id="cod" name="paymentMethod" value="COD" class="form-check-input" checked required>
+            <label for="cod" class="form-check-label">Cash on Delivery</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" id="card" name="paymentMethod" value="Card" class="form-check-input" required>
+            <label for="card" class="form-check-label">Credit/Debit Card</label>
+        </div>
+        <!-- Card Details, hidden by default -->
+        <div id="card-details" style="display: none;">
+            <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="cardExpiry" class="form-label">Expiration Date</label>
+                    <input type="text" id="cardExpiry" name="cardExpiry" class="form-control" placeholder="MM/YY">
+                </div>
+                <div class="col-md-6">
+                    <label for="cardCVC" class="form-label">CVC</label>
+                    <input type="text" id="cardCVC" name="cardCVC" class="form-control" placeholder="CVC">
+                </div>
+            </div>
+        </div>
+    </div> 
 
       <div class="mb-4">
           <h5 class="fw-bold">Order Summary</h5>
@@ -74,3 +95,7 @@
       </div>
   </form>
 </div>
+
+<script src="/js/checkout.js"></script>
+   
+    
