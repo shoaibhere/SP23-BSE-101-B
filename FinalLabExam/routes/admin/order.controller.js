@@ -7,6 +7,8 @@ router.get("/", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const searchQuery = req.query.search || "";
+    const sortBy = req.query.sortBy || 'orderDate';
+    const sortDirection = req.query.sortDirection === 'asc' ? 1 : -1;
 
     const skip = (page - 1) * limit;
     let query = {};
@@ -20,9 +22,9 @@ router.get("/", async (req, res) => {
     }
 
     const TotalOrders = await Order.countDocuments(query);
-
     const orders = await Order.find(query)
       .populate("products.product")
+      .sort({[sortBy]: sortDirection})
       .skip(skip)
       .limit(limit);
 
@@ -37,13 +39,17 @@ router.get("/", async (req, res) => {
       limit,
       hasNextPage: page < totalPages,
       hasPrevPage: page > 1,
-      searchQuery
+      searchQuery,
+      sortDirection: sortDirection === 1 ? 'asc' : 'desc',
+      sortBy
     });
   } catch (error) {
     console.error("Error fetching orders with pagination:", error);
     res.status(500).send("An error occurred while fetching orders.");
   }
 });
+
+
 
 router.get('/delete/:id', async(req,res)=>{
   await Order.findByIdAndDelete(req.params.id);

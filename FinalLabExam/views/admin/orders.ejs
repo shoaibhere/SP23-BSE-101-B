@@ -34,7 +34,6 @@
     </ul>
   </nav>
 </div>
-
 <h3 class="mb-4"><%- pageTitle %></h3>
 
 <form action="/admin/orders" method="GET" class="d-flex form-inline my-2">
@@ -45,11 +44,31 @@
 <table class="table table-bordered">
   <thead class="table-dark">
     <tr>
-      <th>Order ID</th>
-      <th>Customer</th>
-      <th>Total Price</th>
-      <th>Status</th>
-      <th>Order Date</th>
+      <th>
+        <a class="text-light" href="?sortBy=_id&sortDirection=<%= sortBy === '_id' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Order ID <%= sortBy === '_id' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
+      <th>
+        <a class="text-light" href="?sortBy=customer.lastName&sortDirection=<%= sortBy === 'customer.lastName' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Customer <%= sortBy === 'customer.lastName' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
+      <th>
+        <a class="text-light" href="?sortBy=totalPrice&sortDirection=<%= sortBy === 'totalPrice' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Total Price <%= sortBy === 'totalPrice' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
+      <th>
+        <a class="text-light" href="?sortBy=orderStatus&sortDirection=<%= sortBy === 'orderStatus' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Status <%= sortBy === 'orderStatus' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
+      <th>
+        <a class="text-light" href="?sortBy=orderDate&sortDirection=<%= sortBy === 'orderDate' && sortDirection === 'asc' ? 'desc' : 'asc' %>&page=1&limit=<%= limit %>">
+          Order Date <%= sortBy === 'orderDate' ? (sortDirection === 'asc' ? '▲' : '▼') : '' %>
+        </a>
+      </th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -76,3 +95,5 @@
     <% } %>
   </tbody>
 </table>
+
+
